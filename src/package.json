@@ -1,5 +1,5 @@
 {
-  "name": "src",
+  "name": "simple-next",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,14 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@material-tailwind/react": "^2.0.4",
-    "autoprefixer": "10.4.14",
-    "eslint": "8.43.0",
-    "eslint-config-next": "13.4.6",
-    "next": "13.4.6",
-    "postcss": "8.4.24",
+    "@headlessui/react": "^1.7.14",
+    "@types/node": "^20.2.5",
+    "@types/react": "^18.2.7",
+    "@types/react-dom": "^18.2.4",
+    "aos": "^3.0.0-beta.6",
+    "next": "^13.4.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "tailwindcss": "3.3.2"
+    "typescript": "^5.0.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.3",
+    "@types/aos": "^3.0.4",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.24",
+    "tailwindcss": "^3.3.2"
   }
 }
