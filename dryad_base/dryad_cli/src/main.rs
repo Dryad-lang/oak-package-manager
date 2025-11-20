@@ -324,7 +324,7 @@ fn show_tokens(filename: &str) -> Result<(), Box<dyn std::error::Error>> {
 // FUNÇÕES DE GERENCIAMENTO DE PACOTES
 // ======================================
 
-const DEFAULT_REGISTRY: &str = "http://localhost:8000/api/registry";
+const DEFAULT_REGISTRY: &str = "http://localhost:7800/api/registry";
 
 fn publish_package(registry_url: Option<&str>) -> Result<(), Box<dyn std::error::Error>> {
     let registry = registry_url.unwrap_or(DEFAULT_REGISTRY);

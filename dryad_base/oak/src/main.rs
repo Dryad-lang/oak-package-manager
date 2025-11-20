@@ -16,8 +16,8 @@ use dryad_parser::Parser as DryadParser;
 use dryad_runtime::Interpreter;
 
 // Registry configuration
-const DEFAULT_REGISTRY_URL: &str = "http://127.0.0.1:4000";
-const DEFAULT_WEB_URL: &str = "http://127.0.0.1:3000";
+const DEFAULT_REGISTRY_URL: &str = "http://127.0.0.1:7800/api/registry";
+const DEFAULT_WEB_URL: &str = "http://127.0.0.1:7800";
 
 #[derive(Parser)]
 #[command(name = "oak")]
