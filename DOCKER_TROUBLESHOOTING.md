@@ -14,6 +14,16 @@
 # - oniguruma-dev (para mbstring)
 ```
 
+### 1.1. 🚨 Erro: "linux/sock_diag.h: No such file or directory"
+**Problema:** Extensão `sockets` não compila no Alpine Linux.
+
+**Solução:**
+```bash
+# A extensão sockets foi removida pois não é essencial
+# Para Laravel e causa problemas no Alpine Linux.
+# Se precisar de funcionalidade de sockets, use bibliotecas PHP alternativas.
+```
+
 ### 2. 🚨 Erro: "PostgreSQL timeout"
 **Problema:** Laravel não consegue conectar ao PostgreSQL.
 

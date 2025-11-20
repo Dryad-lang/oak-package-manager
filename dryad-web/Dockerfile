@@ -9,15 +9,11 @@ RUN apk add --no-cache \
     unzip \
     git \
     netcat-openbsd \
-    # Image processing libraries \
     libpng-dev \
     libjpeg-turbo-dev \
     freetype-dev \
-    # Archive libraries \
     libzip-dev \
-    # String processing \
     oniguruma-dev \
-    # Database libraries \
     postgresql-dev \
     postgresql-client \
     sqlite \
@@ -34,8 +30,7 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
         zip \
         exif \
         pcntl \
-        bcmath \
-        sockets
+        bcmath
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
