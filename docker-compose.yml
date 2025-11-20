@@ -44,7 +44,7 @@ services:
 
   # Forgejo Git Server
   forgejo:
-    image: codeberg.org/forgejo/forgejo:latest
+    image: ghcr.io/forgejo/forgejo:latest
     environment:
       - USER_UID=1000
       - USER_GID=1000
