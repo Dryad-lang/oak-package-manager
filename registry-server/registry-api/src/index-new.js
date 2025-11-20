@@ -14,6 +14,17 @@ const PORT = process.env.PORT || 4000;
 const PACKAGES_DIR = process.env.PACKAGES_DIR || '/app/packages';
 const UPLOADS_DIR = process.env.UPLOADS_DIR || '/app/uploads';
 
+// Gitea configuration
+const GITEA_URL = process.env.GITEA_URL || 'http://gitea:3000';
+const GITEA_USERNAME = process.env.GITEA_USERNAME || 'admin';
+const GITEA_PASSWORD = process.env.GITEA_PASSWORD || 'admin123';
+const GITEA_TOKEN = process.env.GITEA_TOKEN || 'gitea_admin_token';
+
+console.log('🔧 Gitea Configuration:');
+console.log(`   URL: ${GITEA_URL}`);
+console.log(`   Username: ${GITEA_USERNAME}`);
+console.log(`   Token: ${GITEA_TOKEN ? '***set***' : 'not set'}`);
+
 // Ensure directories exist
 async function ensureDirectories() {
   try {
@@ -79,6 +90,56 @@ app.use((req, res, next) => {
 let packagesStore = {};
 let packageStats = {};
 
+// Gitea API functions
+async function createGiteaRepository(packageName) {
+  try {
+    const response = await fetch(`${GITEA_URL}/api/v1/user/repos`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `token ${GITEA_TOKEN}`
+      },
+      body: JSON.stringify({
+        name: packageName,
+        description: `Dryad package: ${packageName}`,
+        private: false,
+        auto_init: true,
+        gitignores: '',
+        license: 'MIT',
+        readme: 'Default'
+      })
+    });
+
+    if (response.ok) {
+      const repo = await response.json();
+      console.log(`✅ Repository created: ${packageName}`);
+      return repo;
+    } else {
+      const error = await response.text();
+      console.error(`❌ Failed to create repository: ${error}`);
+      return null;
+    }
+  } catch (error) {
+    console.error('❌ Gitea repository creation error:', error);
+    return null;
+  }
+}
+
+async function checkGiteaHealth() {
+  try {
+    const response = await fetch(`${GITEA_URL}/api/v1/version`);
+    if (response.ok) {
+      const version = await response.json();
+      console.log(`✅ Gitea is healthy - Version: ${version.version}`);
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.error('❌ Gitea health check failed:', error);
+    return false;
+  }
+}
+
 // Load existing packages from registry folder
 async function loadExistingPackages() {
   try {
@@ -105,11 +166,21 @@ async function loadExistingPackages() {
 loadExistingPackages();
 
 // API Routes
-app.get('/api/health', (req, res) => {
+app.get('/api/health', async (req, res) => {
+  const giteaHealthy = await checkGiteaHealth();
+  
   res.json({ 
-    status: 'healthy', 
+    status: giteaHealthy ? 'healthy' : 'degraded', 
     timestamp: new Date().toISOString(),
-    packagesCount: Object.keys(packagesStore).length
+    packagesCount: Object.keys(packagesStore).length,
+    services: {
+      gitea: giteaHealthy ? 'healthy' : 'unhealthy',
+      registry: 'healthy'
+    },
+    gitea: {
+      url: GITEA_URL,
+      status: giteaHealthy ? 'connected' : 'disconnected'
+    }
   });
 });
 

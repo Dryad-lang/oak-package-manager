@@ -60,8 +60,9 @@ RUN mkdir -p \
     /var/www/html/bootstrap/cache \
     /var/www/html/database
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database \
+# Set permissions and create supervisor log directory
+RUN mkdir -p /var/log/supervisor /var/log/nginx /var/log/php-fpm \
+    && chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database
 
 # Create SQLite database
