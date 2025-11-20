@@ -26,9 +26,22 @@ if [ ! -f .env ]; then
     echo "✅ Arquivo .env criado"
 fi
 
-# Parar containers existentes
+# Parar containers existentes e limpar completamente
 echo "🛑 Parando containers existentes..."
 docker-compose down -v 2>/dev/null || true
+
+# Limpar todos os containers relacionados ao projeto
+echo "🧹 Limpando containers do projeto..."
+docker ps -aq --filter "name=dryad" 2>/dev/null | xargs -r docker rm -f 2>/dev/null || true
+docker ps -aq --filter "name=oak-package-manager" 2>/dev/null | xargs -r docker rm -f 2>/dev/null || true
+
+# Parar PostgreSQL local se estiver rodando na porta 5432
+echo "🛑 Verificando PostgreSQL local na porta 5432..."
+PG_PID=$(lsof -ti:5432 2>/dev/null || true)
+if [ ! -z "$PG_PID" ]; then
+    echo "⚠️  Parando PostgreSQL local (PID: $PG_PID)"
+    sudo kill -9 $PG_PID 2>/dev/null || true
+fi
 
 # Limpar volumes antigos (opcional)
 read -p "🗑️  Deseja limpar todos os volumes? (y/N): " -n 1 -r

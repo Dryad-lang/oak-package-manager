@@ -26,9 +26,21 @@ if not exist .env (
     echo ✅ Arquivo .env criado
 )
 
-REM Parar containers existentes
+REM Parar containers existentes e limpar completamente
 echo 🛑 Parando containers existentes...
 docker-compose down -v >nul 2>&1
+
+REM Limpar todos os containers relacionados ao projeto
+echo 🧹 Limpando containers do projeto...
+for /f "tokens=1" %%i in ('docker ps -aq --filter "name=dryad" 2^>nul') do docker rm -f %%i >nul 2>&1
+for /f "tokens=1" %%i in ('docker ps -aq --filter "name=oak-package-manager" 2^>nul') do docker rm -f %%i >nul 2>&1
+
+REM Parar PostgreSQL local se estiver rodando na porta 5432
+echo 🛑 Verificando PostgreSQL local na porta 5432...
+for /f "tokens=5" %%a in ('netstat -aon ^| findstr :5432 2^>nul') do (
+    echo ⚠️  Parando processo na porta 5432 (PID: %%a)
+    taskkill /PID %%a /F >nul 2>&1
+)
 
 REM Perguntar sobre limpeza de volumes
 set /p cleanup="🗑️  Deseja limpar todos os volumes? (y/N): "
