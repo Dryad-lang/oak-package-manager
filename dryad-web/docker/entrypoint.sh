@@ -36,6 +36,15 @@ if [ "$DB_CONNECTION" = "pgsql" ]; then
     echo "✅ PostgreSQL is up - continuing"
 fi
 
+# Generate application key if not set
+echo "Checking application key..."
+if ! php artisan key:generate --no-interaction --show 2>/dev/null | grep -q "base64:"; then
+    echo "Generating new application key..."
+    php artisan key:generate --no-interaction
+else
+    echo "✅ Application key already set"
+fi
+
 # Run migrations and seed with error handling
 echo "Running database migrations..."
 if ! php artisan migrate --force --no-interaction; then

@@ -41,6 +41,11 @@ WORKDIR /var/www/html
 # Copy application files
 COPY . /var/www/html
 
+# Ensure .env file exists (copy from .env.example if .env doesn't exist)
+RUN if [ ! -f /var/www/html/.env ]; then \
+        cp /var/www/html/.env.example /var/www/html/.env; \
+    fi
+
 # Install PHP dependencies
 RUN composer install --optimize-autoloader --no-dev
 
@@ -72,13 +77,7 @@ COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-# Generate application key and run migrations
-RUN php artisan key:generate --no-interaction \
-    && php artisan migrate --no-interaction --force \
-    && php artisan config:cache \
-    && php artisan route:cache \
-    && php artisan view:cache
-
+# Expose port
 EXPOSE 80
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
