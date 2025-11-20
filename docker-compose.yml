@@ -18,7 +18,7 @@ services:
       - DB_PASSWORD=dryad_pass
       - FORGEJO_URL=http://forgejo:3000
       - FORGEJO_TOKEN=${FORGEJO_TOKEN:-}
-      - APP_URL=http://localhost:7800
+      - APP_URL=http://localhost:8000
       - APP_ENV=local
       - APP_DEBUG=true
     depends_on:
@@ -44,7 +44,7 @@ services:
 
   # Forgejo Git Server
   forgejo:
-    image: forgejo/forgejo:1.21
+    image: forgejo/forgejo:latest
     environment:
       - USER_UID=1000
       - USER_GID=1000
