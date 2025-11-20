@@ -14,10 +14,17 @@ services:
     # volumes:
     #   - ./dryad-web:/var/www/html  # Removido para não sobrescrever vendor/
     depends_on:
-      - registry-api
-      - postgres
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
     networks:
       - dryad-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
 
   # PostgreSQL Database
   postgres:
@@ -26,20 +33,25 @@ services:
     ports:
       - "7832:5432"
     environment:
-      - POSTGRES_DB=dryad_packages
-      - POSTGRES_USER=dryad_user
-      - POSTGRES_PASSWORD=dryad_pass
-      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
+      POSTGRES_DB: dryad_packages
+      POSTGRES_USER: dryad_user
+      POSTGRES_PASSWORD: dryad_pass
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --lc-collate=C --lc-ctype=C"
+      # Configurações para múltiplos bancos
+      POSTGRES_MULTIPLE_DATABASES: "gitea"
+      POSTGRES_MULTIPLE_USERS: "gitea:gitea_password"
     volumes:
       - postgres-data:/var/lib/postgresql/data
       - ./database/init:/docker-entrypoint-initdb.d
     networks:
       - dryad-network
+    restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U dryad_user -d dryad_packages"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
+      start_period: 40s
 
   # Registry API Server
   registry-api:
@@ -70,36 +82,38 @@ services:
     networks:
       - dryad-network
     depends_on:
-      - postgres
-      - gitea
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:4000/api/health"]
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:4000/api/health"]
       interval: 30s
       timeout: 10s
       retries: 3
+      start_period: 45s
 
   # Git Server (Gitea) para versionamento de pacotes
   gitea:
     image: gitea/gitea:1.21
     container_name: dryad-gitea
     environment:
-      - USER_UID=1000
-      - USER_GID=1000
-      - GITEA__database__DB_TYPE=postgres
-      - GITEA__database__HOST=postgres:5432
-      - GITEA__database__NAME=gitea
-      - GITEA__database__USER=gitea
-      - GITEA__database__PASSWD=gitea_password
-      - GITEA__server__DOMAIN=localhost
-      - GITEA__server__SSH_DOMAIN=localhost
-      - GITEA__server__ROOT_URL=http://localhost:7850/
-      - GITEA__server__HTTP_PORT=3000
-      - GITEA__security__INSTALL_LOCK=true
-      - GITEA__security__SECRET_KEY=dryad_gitea_secret_key_2024
-      - GITEA__webhook__ALLOWED_HOST_LIST=*
-      - GITEA__service__DISABLE_REGISTRATION=false
-      - GITEA__service__REQUIRE_SIGNIN_VIEW=false
-    restart: unless-stopped
+      USER_UID: 1000
+      USER_GID: 1000
+      GITEA__database__DB_TYPE: postgres
+      GITEA__database__HOST: dryad-postgres
+      GITEA__database__PORT: 5432
+      GITEA__database__NAME: gitea
+      GITEA__database__USER: gitea
+      GITEA__database__PASSWD: gitea_password
+      GITEA__server__DOMAIN: localhost
+      GITEA__server__SSH_DOMAIN: localhost
+      GITEA__server__ROOT_URL: "http://localhost:7850/"
+      GITEA__server__HTTP_PORT: 3000
+      GITEA__security__INSTALL_LOCK: false
+      GITEA__security__SECRET_KEY: dryad_gitea_secret_key_2024
+      GITEA__webhook__ALLOWED_HOST_LIST: "*"
+      GITEA__service__DISABLE_REGISTRATION: false
+      GITEA__service__REQUIRE_SIGNIN_VIEW: false
     networks:
       - dryad-network
     volumes:
@@ -108,12 +122,15 @@ services:
       - "7850:3000"
       - "7822:22"
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000"]
       interval: 30s
       timeout: 10s
-      retries: 3
+      retries: 5
+      start_period: 60s
 
   # Nginx Reverse Proxy
   nginx:
@@ -145,6 +162,11 @@ services:
 networks:
   dryad-network:
     driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: "dryad-br0"
+    ipam:
+      config:
+        - subnet: "172.20.0.0/16"
 
 volumes:
   registry-packages:

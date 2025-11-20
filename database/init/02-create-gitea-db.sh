@@ -18,7 +18,8 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
     GRANT ALL ON SCHEMA public TO gitea;
     
     -- Voltar ao banco principal
-    \c $POSTGRES_DB
+    \c $POSTGRES_DB;
     
-    ECHO 'Múltiplos bancos de dados criados com sucesso!';
+    -- Confirmar criação
+    \echo 'Múltiplos bancos de dados criados com sucesso!';
 EOSQL
