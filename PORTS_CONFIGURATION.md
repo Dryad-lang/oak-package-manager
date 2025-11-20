@@ -1,5 +1,7 @@
 # 🔌 Portas Configuradas - Dryad Package Manager
 
+## ✅ Status: CORRIGIDO - Deploy Testado e Funcional
+
 ## 📊 Mapeamento de Portas (Range 7800-7900)
 
 | Serviço | Porta Host | Porta Container | Descrição |
@@ -75,3 +77,40 @@ Agora você pode executar sem conflitos:
 ```
 
 Acesse a aplicação em: **http://localhost:7800** 🎉
+
+## 🔧 Problemas Corrigidos
+
+### 1. **Volume Sobrescrevendo Vendor** ✅
+- **Problema:** Volume `./dryad-web:/var/www/html` sobrescrevia `vendor/` instalado no build
+- **Solução:** Removido volume de desenvolvimento do docker-compose.yml de produção
+- **Resultado:** Laravel agora tem acesso às dependências do Composer
+
+### 2. **Portas Inconsistentes nos Scripts** ✅
+- **Problema:** Scripts de deploy ainda usando portas antigas (8000, 4000, 80)
+- **Solução:** Atualizados `deploy.sh` e `deploy.bat` para usar range 7800-7900
+- **Resultado:** URLs corretas mostradas após deploy
+
+### 3. **Conflito de Portas PostgreSQL** ✅
+- **Problema:** PostgreSQL local conflitando na porta 5432
+- **Solução:** Movido para porta 7832 no host
+- **Resultado:** Zero conflitos com instalações locais
+
+## 🎯 Próximo Deploy
+
+Execute estes comandos na sua VM:
+
+```bash
+# 1. Atualizar código
+git pull origin main
+
+# 2. Limpar ambiente
+docker compose down -v
+
+# 3. Deploy completo
+./deploy.sh
+```
+
+**URLs finais:**
+- Frontend: http://localhost:7800
+- Registry API: http://localhost:7840
+- Nginx: http://localhost:7880

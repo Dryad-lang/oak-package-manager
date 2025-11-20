@@ -80,17 +80,17 @@ if %errorlevel%==0 (
 )
 
 REM Verificar Laravel Web
-curl -s http://localhost:8000 >nul 2>&1
+curl -s http://localhost:7800 >nul 2>&1
 if %errorlevel%==0 (
-    echo ✅ Laravel Web está funcionando (porta 8000)
+    echo ✅ Laravel Web está funcionando (porta 7800)
 ) else (
     echo ❌ Laravel Web não está respondendo
 )
 
 REM Verificar Nginx
-curl -s http://localhost >nul 2>&1
+curl -s http://localhost:7880 >nul 2>&1
 if %errorlevel%==0 (
-    echo ✅ Nginx está funcionando (porta 80)
+    echo ✅ Nginx está funcionando (porta 7880)
 ) else (
     echo ⚠️  Nginx não está configurado ou não está respondendo
 )
@@ -99,9 +99,9 @@ echo.
 echo 🎉 Deploy concluído!
 echo.
 echo 📌 URLs de Acesso:
-echo    🌐 Frontend: http://localhost:8000
-echo    🔧 API Registry: http://localhost:4000
-echo    📊 API Health: http://localhost:4000/api/health
+echo    🌐 Frontend: http://localhost:7800
+echo    🔧 API Registry: http://localhost:7840
+echo    📊 API Health: http://localhost:7840/api/health
 echo.
 echo 📋 Comandos úteis:
 echo    docker-compose logs -f          # Ver logs em tempo real

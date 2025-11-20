@@ -13,8 +13,8 @@ services:
       - APP_ENV=production
       - APP_DEBUG=false
       - DRYAD_REGISTRY_URL=http://registry-api:4000
-    volumes:
-      - ./dryad-web:/var/www/html
+    # volumes:
+    #   - ./dryad-web:/var/www/html  # Removido para não sobrescrever vendor/
     depends_on:
       - registry-api
       - postgres

@@ -74,22 +74,22 @@ sleep 30
 echo "🔍 Verificando status dos serviços..."
 
 # Verificar Registry API
-if curl -s http://localhost:4000/api/health > /dev/null; then
-    echo "✅ Registry API está funcionando (porta 4000)"
+if curl -s http://localhost:7840/api/health > /dev/null; then
+    echo "✅ Registry API está funcionando (porta 7840)"
 else
     echo "❌ Registry API não está respondendo"
 fi
 
 # Verificar Laravel Web
-if curl -s http://localhost:8000 > /dev/null; then
-    echo "✅ Laravel Web está funcionando (porta 8000)"
+if curl -s http://localhost:7880 > /dev/null; then
+    echo "✅ Laravel Web está funcionando (porta 7800)"
 else
     echo "❌ Laravel Web não está respondendo"
 fi
 
 # Verificar Nginx (se configurado)
 if curl -s http://localhost > /dev/null; then
-    echo "✅ Nginx está funcionando (porta 80)"
+    echo "✅ Nginx está funcionando (porta 7880)"
 else
     echo "⚠️  Nginx não está configurado ou não está respondendo"
 fi
@@ -98,9 +98,9 @@ echo ""
 echo "🎉 Deploy concluído!"
 echo ""
 echo "📌 URLs de Acesso:"
-echo "   🌐 Frontend: http://localhost:8000"
-echo "   🔧 API Registry: http://localhost:4000" 
-echo "   📊 API Health: http://localhost:4000/api/health"
+echo "   🌐 Frontend: http://localhost:7800"
+echo "   🔧 API Registry: http://localhost:7840"
+echo "   📊 API Health: http://localhost:7840/api/health"
 echo ""
 echo "📋 Comandos úteis:"
 echo "   docker-compose logs -f          # Ver logs em tempo real"
