@@ -47,8 +47,8 @@ RUN if [ -f /var/www/html/.env.docker ]; then \
         cp /var/www/html/.env.example /var/www/html/.env; \
     fi
 
-# Install PHP dependencies
-RUN composer install --optimize-autoloader --no-dev
+# Note: Composer install will be done in entrypoint.sh when using volumes
+# This allows the vendor directory to persist correctly with volume mounts
 
 # Create necessary directories
 RUN mkdir -p \

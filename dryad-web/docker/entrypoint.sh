@@ -4,6 +4,12 @@
 echo "Waiting for services to be ready..."
 sleep 10
 
+# Install Composer dependencies if vendor directory doesn't exist
+if [ ! -d "/var/www/html/vendor" ]; then
+    echo "📦 Installing Composer dependencies..."
+    composer install --optimize-autoloader --no-dev --no-interaction
+fi
+
 # Ensure proper permissions
 chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
@@ -34,6 +40,23 @@ if [ "$DB_CONNECTION" = "pgsql" ]; then
         exit 1
     fi
     echo "✅ PostgreSQL is up - continuing"
+fi
+
+# Wait for MariaDB/MySQL if using it
+if [ "$DB_CONNECTION" = "mysql" ]; then
+    echo "Waiting for MariaDB ($DB_HOST:$DB_PORT)..."
+    timeout=60
+    while ! nc -z "$DB_HOST" "$DB_PORT" && [ $timeout -gt 0 ]; do
+        echo "MariaDB is unavailable - sleeping (${timeout}s remaining)"
+        sleep 2
+        timeout=$((timeout - 2))
+    done
+    
+    if [ $timeout -le 0 ]; then
+        echo "❌ Timeout waiting for MariaDB!"
+        exit 1
+    fi
+    echo "✅ MariaDB is up - continuing"
 fi
 
 # Generate application key if not set
