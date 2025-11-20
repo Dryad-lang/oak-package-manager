@@ -5,17 +5,23 @@ RUN apk add --no-cache \
     nginx \
     supervisor \
     curl \
-    sqlite \
     zip \
     unzip \
     git \
+    netcat-openbsd \
+    # Image processing libraries \
     libpng-dev \
     libjpeg-turbo-dev \
     freetype-dev \
+    # Archive libraries \
     libzip-dev \
+    # String processing \
     oniguruma-dev \
+    # Database libraries \
     postgresql-dev \
-    netcat-openbsd
+    postgresql-client \
+    sqlite \
+    sqlite-dev
 
 # Install PHP extensions
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
@@ -28,7 +34,8 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
         zip \
         exif \
         pcntl \
-        bcmath
+        bcmath \
+        sockets
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer

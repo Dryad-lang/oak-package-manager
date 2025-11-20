@@ -21,20 +21,32 @@ fi
 
 # Wait for PostgreSQL if using it
 if [ "$DB_CONNECTION" = "pgsql" ]; then
-    echo "Waiting for PostgreSQL..."
-    while ! nc -z "$DB_HOST" "$DB_PORT"; do
-        echo "PostgreSQL is unavailable - sleeping"
+    echo "Waiting for PostgreSQL ($DB_HOST:$DB_PORT)..."
+    timeout=60
+    while ! nc -z "$DB_HOST" "$DB_PORT" && [ $timeout -gt 0 ]; do
+        echo "PostgreSQL is unavailable - sleeping (${timeout}s remaining)"
         sleep 2
+        timeout=$((timeout - 2))
     done
-    echo "PostgreSQL is up - continuing"
+    
+    if [ $timeout -le 0 ]; then
+        echo "❌ Timeout waiting for PostgreSQL!"
+        exit 1
+    fi
+    echo "✅ PostgreSQL is up - continuing"
 fi
 
-# Run migrations and seed
+# Run migrations and seed with error handling
 echo "Running database migrations..."
-php artisan migrate --force --no-interaction
+if ! php artisan migrate --force --no-interaction; then
+    echo "❌ Database migration failed!"
+    exit 1
+fi
 
 echo "Seeding database..."
-php artisan db:seed --force --no-interaction
+if ! php artisan db:seed --force --no-interaction; then
+    echo "⚠️ Database seeding failed, but continuing..."
+fi
 
 # Clear and cache config for production
 php artisan config:cache
