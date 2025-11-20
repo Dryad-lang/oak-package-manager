@@ -1,0 +1,8 @@
+E:\git\oak-package-manager\dryad_base\target\debug\deps\zerocopy_derive-dfac46106f71970a.d: C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\zerocopy-derive-0.8.27\src\lib.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\zerocopy-derive-0.8.27\src\enum.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\zerocopy-derive-0.8.27\src\ext.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\zerocopy-derive-0.8.27\src\repr.rs
+
+E:\git\oak-package-manager\dryad_base\target\debug\deps\zerocopy_derive-dfac46106f71970a.dll: C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\zerocopy-derive-0.8.27\src\lib.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\zerocopy-derive-0.8.27\src\enum.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\zerocopy-derive-0.8.27\src\ext.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\zerocopy-derive-0.8.27\src\repr.rs
+
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\zerocopy-derive-0.8.27\src\lib.rs:
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\zerocopy-derive-0.8.27\src\enum.rs:
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\zerocopy-derive-0.8.27\src\ext.rs:
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\zerocopy-derive-0.8.27\src\repr.rs:

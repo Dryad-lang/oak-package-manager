@@ -1,0 +1,8 @@
+E:\git\oak-package-manager\dryad_base\target\release\deps\crossbeam_deque-252a1ebeaf6cf978.d: C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\crossbeam-deque-0.8.6\src\lib.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\crossbeam-deque-0.8.6\src\deque.rs
+
+E:\git\oak-package-manager\dryad_base\target\release\deps\libcrossbeam_deque-252a1ebeaf6cf978.rlib: C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\crossbeam-deque-0.8.6\src\lib.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\crossbeam-deque-0.8.6\src\deque.rs
+
+E:\git\oak-package-manager\dryad_base\target\release\deps\libcrossbeam_deque-252a1ebeaf6cf978.rmeta: C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\crossbeam-deque-0.8.6\src\lib.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\crossbeam-deque-0.8.6\src\deque.rs
+
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\crossbeam-deque-0.8.6\src\lib.rs:
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\crossbeam-deque-0.8.6\src\deque.rs:

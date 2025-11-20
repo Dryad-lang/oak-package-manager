@@ -1,0 +1,22 @@
+#<console_io>
+
+let HashMap = {
+    "nome": "Alice",
+    "idade": 30,
+    "cidade": "Lisboa"
+};
+
+print("=== Teste de HashMap ===");
+print("Nome: " + HashMap["nome"]);
+print("Idade: " + HashMap["idade"]);
+print("Cidade: " + HashMap["cidade"]);
+
+// Modifica idade
+HashMap["idade"] = 31;
+print("Nova idade: " + HashMap["idade"]);
+
+// Adiciona nova propriedade
+HashMap["profissao"] = "Engenheira";
+print("Profissao: " + HashMap["profissao"]);
+
+print("=== Teste completado ===");

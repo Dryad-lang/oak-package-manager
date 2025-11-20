@@ -1,0 +1,10 @@
+E:\git\oak-package-manager\dryad_base\target\release\deps\idna-7c97f86adc7a3e7d.d: C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\idna-1.1.0\src\lib.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\idna-1.1.0\src\deprecated.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\idna-1.1.0\src\punycode.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\idna-1.1.0\src\uts46.rs
+
+E:\git\oak-package-manager\dryad_base\target\release\deps\libidna-7c97f86adc7a3e7d.rlib: C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\idna-1.1.0\src\lib.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\idna-1.1.0\src\deprecated.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\idna-1.1.0\src\punycode.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\idna-1.1.0\src\uts46.rs
+
+E:\git\oak-package-manager\dryad_base\target\release\deps\libidna-7c97f86adc7a3e7d.rmeta: C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\idna-1.1.0\src\lib.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\idna-1.1.0\src\deprecated.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\idna-1.1.0\src\punycode.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\idna-1.1.0\src\uts46.rs
+
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\idna-1.1.0\src\lib.rs:
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\idna-1.1.0\src\deprecated.rs:
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\idna-1.1.0\src\punycode.rs:
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\idna-1.1.0\src\uts46.rs:

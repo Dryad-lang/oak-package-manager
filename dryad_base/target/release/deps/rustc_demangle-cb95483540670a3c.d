@@ -1,0 +1,9 @@
+E:\git\oak-package-manager\dryad_base\target\release\deps\rustc_demangle-cb95483540670a3c.d: C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustc-demangle-0.1.26\src\lib.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustc-demangle-0.1.26\src\legacy.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustc-demangle-0.1.26\src\v0.rs
+
+E:\git\oak-package-manager\dryad_base\target\release\deps\librustc_demangle-cb95483540670a3c.rlib: C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustc-demangle-0.1.26\src\lib.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustc-demangle-0.1.26\src\legacy.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustc-demangle-0.1.26\src\v0.rs
+
+E:\git\oak-package-manager\dryad_base\target\release\deps\librustc_demangle-cb95483540670a3c.rmeta: C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustc-demangle-0.1.26\src\lib.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustc-demangle-0.1.26\src\legacy.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustc-demangle-0.1.26\src\v0.rs
+
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustc-demangle-0.1.26\src\lib.rs:
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustc-demangle-0.1.26\src\legacy.rs:
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustc-demangle-0.1.26\src\v0.rs:

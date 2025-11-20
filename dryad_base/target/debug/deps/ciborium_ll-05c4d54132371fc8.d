@@ -1,0 +1,9 @@
+E:\git\oak-package-manager\dryad_base\target\debug\deps\ciborium_ll-05c4d54132371fc8.d: C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ciborium-ll-0.2.2\src\lib.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ciborium-ll-0.2.2\src\dec.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ciborium-ll-0.2.2\src\enc.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ciborium-ll-0.2.2\src\hdr.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ciborium-ll-0.2.2\src\seg.rs
+
+E:\git\oak-package-manager\dryad_base\target\debug\deps\libciborium_ll-05c4d54132371fc8.rmeta: C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ciborium-ll-0.2.2\src\lib.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ciborium-ll-0.2.2\src\dec.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ciborium-ll-0.2.2\src\enc.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ciborium-ll-0.2.2\src\hdr.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ciborium-ll-0.2.2\src\seg.rs
+
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ciborium-ll-0.2.2\src\lib.rs:
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ciborium-ll-0.2.2\src\dec.rs:
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ciborium-ll-0.2.2\src\enc.rs:
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ciborium-ll-0.2.2\src\hdr.rs:
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ciborium-ll-0.2.2\src\seg.rs:

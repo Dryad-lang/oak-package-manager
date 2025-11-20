@@ -1,0 +1,145 @@
+version: '3.8'
+
+services:
+  # Git Server (Gitea) para versionamento de pacotes
+  gitea:
+    image: gitea/gitea:1.21
+    container_name: dryad-gitea
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - GITEA__database__DB_TYPE=postgres
+      - GITEA__database__HOST=postgres:5432
+      - GITEA__database__NAME=gitea
+      - GITEA__database__USER=gitea
+      - GITEA__database__PASSWD=gitea_password
+      - GITEA__server__DOMAIN=oak.dryadlang.org
+      - GITEA__server__SSH_DOMAIN=oak.dryadlang.org
+      - GITEA__server__ROOT_URL=http://oak.dryadlang.org:3000/
+      - GITEA__security__INSTALL_LOCK=true
+      - GITEA__security__SECRET_KEY=your_secret_key_here
+      - GITEA__webhook__ALLOWED_HOST_LIST=*
+    restart: always
+    networks:
+      - dryad-network
+    volumes:
+      - gitea-data:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3000:3000"
+      - "2222:22"
+    depends_on:
+      - postgres
+
+  # Database para Gitea
+  postgres:
+    image: postgres:15
+    container_name: dryad-postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=gitea
+      - POSTGRES_PASSWORD=gitea_password
+      - POSTGRES_DB=gitea
+    networks:
+      - dryad-network
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  # Registry API Server (Node.js/Express)
+  registry-api:
+    build: ./registry-api
+    container_name: dryad-registry-api
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - PORT=4000
+      - DATABASE_URL=postgresql://registry:registry_password@postgres-registry:5432/dryad_registry
+      - GITEA_URL=http://gitea:3000
+      - GITEA_TOKEN=your_gitea_token_here
+      - JWT_SECRET=your_jwt_secret_here
+      - UPLOAD_DIR=/app/uploads
+      - PACKAGES_DIR=/app/packages
+    networks:
+      - dryad-network
+    volumes:
+      - registry-packages:/app/packages
+      - registry-uploads:/app/uploads
+    ports:
+      - "4000:4000"
+    depends_on:
+      - postgres-registry
+      - gitea
+
+  # Database para Registry API
+  postgres-registry:
+    image: postgres:15
+    container_name: dryad-postgres-registry
+    restart: always
+    environment:
+      - POSTGRES_USER=registry
+      - POSTGRES_PASSWORD=registry_password
+      - POSTGRES_DB=dryad_registry
+    networks:
+      - dryad-network
+    volumes:
+      - postgres-registry-data:/var/lib/postgresql/data
+
+  # Web Interface (React/Next.js)
+  web-interface:
+    build: ./web-interface
+    container_name: dryad-web-interface
+    restart: always
+    environment:
+      - NEXT_PUBLIC_API_URL=http://oak.dryadlang.org:4000
+      - NEXT_PUBLIC_GITEA_URL=http://oak.dryadlang.org:3000
+    networks:
+      - dryad-network
+    ports:
+      - "3001:3000"
+    depends_on:
+      - registry-api
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    container_name: dryad-nginx
+    restart: always
+    networks:
+      - dryad-network
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - registry-api
+      - web-interface
+      - gitea
+
+  # Redis para cache e sessões
+  redis:
+    image: redis:7-alpine
+    container_name: dryad-redis
+    restart: always
+    networks:
+      - dryad-network
+    volumes:
+      - redis-data:/data
+    ports:
+      - "6379:6379"
+
+networks:
+  dryad-network:
+    driver: bridge
+
+volumes:
+  gitea-data:
+  postgres-data:
+  postgres-registry-data:
+  registry-packages:
+  registry-uploads:
+  redis-data:

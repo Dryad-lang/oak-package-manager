@@ -1,0 +1,37 @@
+// Teste do novo servidor HTTP sem Tokio
+// Testando a correção dos problemas de threading
+
+#<http_server>
+#<console_io>
+
+native_println("🌳 Testando novo servidor HTTP (sem Tokio)");
+
+// Cria servidor
+native_http_server_create("teste", "127.0.0.1", 8080);
+
+// Define rotas simples
+native_http_server_get("teste", "/", "<h1>🚀 Servidor Dryad funcionando!</h1><p>Nova implementação sem conflitos do Tokio</p>");
+
+native_http_server_get("teste", "/test", "<h2>Página de Teste</h2><p>Async/Threading integrado com sucesso!</p>");
+
+native_http_server_json("teste", "/api/status", '{"status": "ok", "server": "dryad", "version": "1.0"}');
+
+// Inicia servidor
+native_println("🚀 Iniciando servidor na porta 8080...");
+native_http_server_start("teste");
+
+native_println("✅ Servidor iniciado!");
+native_println("📱 Teste as URLs:");
+native_println("   • http://127.0.0.1:8080/");
+native_println("   • http://127.0.0.1:8080/test");
+native_println("   • http://127.0.0.1:8080/api/status");
+
+// Aguarda 10 segundos
+native_println("⏰ Servidor rodará por 10 segundos...");
+native_sleep(10000);
+
+// Para servidor
+native_println("🛑 Parando servidor...");
+native_http_server_stop("teste");
+
+native_println("✅ Teste concluído com sucesso!");

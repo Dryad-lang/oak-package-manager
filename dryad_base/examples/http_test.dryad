@@ -1,0 +1,33 @@
+// Exemplo de uso do módulo HTTP #<http>
+#<http>
+#<console_io>
+#<websocket>
+#<time>
+
+native_println("Carregado!");
+
+// Realiza um GET simples
+let conteudo = native_http_get("https://jsonplaceholder.typicode.com/posts/1");
+native_println("Conteúdo recebido:");
+native_println(conteudo);
+
+let server = native_ws_listen(8080);
+if server == 1 {
+    native_println("WebSocket servidor iniciado na porta 8080");
+} else {
+    native_println("Falha ao iniciar WebSocket servidor");
+}
+
+// While listening for WebSocket connections
+
+// listener loop para o servidor 30 segundos
+
+let start_time = native_now();
+
+while native_now() - start_time < 30 {
+    let msg = native_ws_server_recv();
+    if msg != "" {
+        native_println("Mensagem recebida: " + msg);
+        native_ws_send_all(server, "Echo: " + msg);
+    }
+}

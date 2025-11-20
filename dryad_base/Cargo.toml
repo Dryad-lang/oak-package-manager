@@ -1,0 +1,17 @@
+[workspace]
+resolver = "2"
+members = [
+    "dryad_errors",
+    "dryad_lexer", 
+    "dryad_parser",
+    "dryad_runtime",
+    "dryad_cli",
+    "dryad_benchmark",
+    "oak",
+]
+
+[workspace.dependencies]
+dryad_errors = { path = "./dryad_errors" }
+dryad_lexer = { path = "./dryad_lexer" }
+dryad_parser = { path = "./dryad_parser" }
+dryad_runtime = { path = "./dryad_runtime" }

@@ -1,0 +1,16 @@
+// Teste do sistema de erros unificado
+fn main() {
+    let x = 10;
+    let y = "hello";
+    
+    // Erro de tipo: tentando somar número com string
+    let result = x + y;
+    
+    // Variável não declarada
+    print(undefined_var);
+    
+    // Sintaxe inválida - parênteses não fechados
+    if (x > 5 {
+        print("teste");
+    }
+}

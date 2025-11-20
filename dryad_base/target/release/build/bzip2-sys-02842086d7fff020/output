@@ -1,0 +1,90 @@
+OPT_LEVEL = Some(3)
+TARGET = Some(x86_64-pc-windows-msvc)
+CARGO_ENCODED_RUSTFLAGS = Some()
+cargo:rerun-if-env-changed=VCINSTALLDIR
+VCINSTALLDIR = None
+cargo:rerun-if-env-changed=VSTEL_MSBuildProjectFullPath
+VSTEL_MSBuildProjectFullPath = None
+cargo:rerun-if-env-changed=VCToolsVersion
+VCToolsVersion = None
+cargo:rerun-if-env-changed=VSCMD_ARG_VCVARS_SPECTRE
+VSCMD_ARG_VCVARS_SPECTRE = None
+cargo:rerun-if-env-changed=WindowsSdkDir
+WindowsSdkDir = None
+cargo:rerun-if-env-changed=WindowsSDKVersion
+WindowsSDKVersion = None
+cargo:rerun-if-env-changed=LIB
+LIB = None
+PATH = Some(E:\git\oak-package-manager\dryad_base\target\release\deps;E:\git\oak-package-manager\dryad_base\target\release;C:\Users\pedro.DESKTOP-EI6JCR4\.rustup\toolchains\stable-x86_64-pc-windows-msvc\lib\rustlib\x86_64-pc-windows-msvc\lib;c:\Users\pedro.DESKTOP-EI6JCR4\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\pedro.DESKTOP-EI6JCR4\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\laragon\bin\php\php-8.3.16-Win32-vs16-x64;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\CMake\bin;C:\tools\php84;C:\ProgramData\ComposerSetup\bin;C:\Users\pedro.DESKTOP-EI6JCR4\.local\bin;C:\Users\pedro.DESKTOP-EI6JCR4\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\pedro.DESKTOP-EI6JCR4\AppData\Local\Programs\Python\Python310\;C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\bin;C:\Users\pedro.DESKTOP-EI6JCR4\AppData\Local\pnpm;C:\Users\pedro.DESKTOP-EI6JCR4\AppData\Local\Microsoft\WindowsApps;C:\Users\pedro.DESKTOP-EI6JCR4\.dotnet\tools;C:\Users\pedro.DESKTOP-EI6JCR4\AppData\Roaming\Composer\vendor\bin;C:\Users\pedro.DESKTOP-EI6JCR4\AppData\Local\Muse Hub\lib;C:\Program Files\NSSM;C:\Users\pedro.DESKTOP-EI6JCR4\.bun\bin;C:\Users\pedro.DESKTOP-EI6JCR4\AppData\Roaming\npm;C:\Users\pedro.DESKTOP-EI6JCR4\.lmstudio\bin;C:\Users\pedro.DESKTOP-EI6JCR4\AppData\Local\Programs\Ollama;C:\Program Files\NASM\;C:\Program Files\Golink;C:\Users\pedro.DESKTOP-EI6JCR4\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\pedro.DESKTOP-EI6JCR4\.rustup\toolchains\stable-x86_64-pc-windows-msvc\bin)
+cargo:rerun-if-env-changed=INCLUDE
+INCLUDE = None
+HOST = Some(x86_64-pc-windows-msvc)
+cargo:rerun-if-env-changed=CC_x86_64-pc-windows-msvc
+CC_x86_64-pc-windows-msvc = None
+cargo:rerun-if-env-changed=CC_x86_64_pc_windows_msvc
+CC_x86_64_pc_windows_msvc = None
+cargo:rerun-if-env-changed=HOST_CC
+HOST_CC = None
+cargo:rerun-if-env-changed=CC
+CC = None
+cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+CRATE_CC_NO_DEFAULTS = None
+CARGO_CFG_TARGET_FEATURE = Some(cmpxchg16b,fxsr,sse,sse2,sse3)
+DEBUG = Some(false)
+cargo:rerun-if-env-changed=CFLAGS
+CFLAGS = None
+cargo:rerun-if-env-changed=HOST_CFLAGS
+HOST_CFLAGS = None
+cargo:rerun-if-env-changed=CFLAGS_x86_64_pc_windows_msvc
+CFLAGS_x86_64_pc_windows_msvc = None
+cargo:rerun-if-env-changed=CFLAGS_x86_64-pc-windows-msvc
+CFLAGS_x86_64-pc-windows-msvc = None
+cargo:rerun-if-env-changed=CC_ENABLE_DEBUG_OUTPUT
+blocksort.c
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bzip2-sys-0.1.13+1.0.8\bzip2-1.0.8\bzlib.h(70): warning C4005: 'BZ_EXPORT': redefini‡Æo de macro
+bzip2-1.0.8/blocksort.c: note: consulte a defini‡Æo anterior de 'BZ_EXPORT'
+huffman.c
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bzip2-sys-0.1.13+1.0.8\bzip2-1.0.8\bzlib.h(70): warning C4005: 'BZ_EXPORT': redefini‡Æo de macro
+bzip2-1.0.8/huffman.c: note: consulte a defini‡Æo anterior de 'BZ_EXPORT'
+crctable.c
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bzip2-sys-0.1.13+1.0.8\bzip2-1.0.8\bzlib.h(70): warning C4005: 'BZ_EXPORT': redefini‡Æo de macro
+bzip2-1.0.8/crctable.c: note: consulte a defini‡Æo anterior de 'BZ_EXPORT'
+randtable.c
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bzip2-sys-0.1.13+1.0.8\bzip2-1.0.8\bzlib.h(70): warning C4005: 'BZ_EXPORT': redefini‡Æo de macro
+bzip2-1.0.8/randtable.c: note: consulte a defini‡Æo anterior de 'BZ_EXPORT'
+compress.c
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bzip2-sys-0.1.13+1.0.8\bzip2-1.0.8\bzlib.h(70): warning C4005: 'BZ_EXPORT': redefini‡Æo de macro
+bzip2-1.0.8/compress.c: note: consulte a defini‡Æo anterior de 'BZ_EXPORT'
+decompress.c
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bzip2-sys-0.1.13+1.0.8\bzip2-1.0.8\bzlib.h(70): warning C4005: 'BZ_EXPORT': redefini‡Æo de macro
+bzip2-1.0.8/decompress.c: note: consulte a defini‡Æo anterior de 'BZ_EXPORT'
+bzlib.c
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bzip2-sys-0.1.13+1.0.8\bzip2-1.0.8\bzlib.h(70): warning C4005: 'BZ_EXPORT': redefini‡Æo de macro
+bzip2-1.0.8/bzlib.c: note: consulte a defini‡Æo anterior de 'BZ_EXPORT'
+exit code: 0
+exit code: 0
+exit code: 0
+exit code: 0
+exit code: 0
+exit code: 0
+exit code: 0
+cargo:rerun-if-env-changed=AR_x86_64-pc-windows-msvc
+AR_x86_64-pc-windows-msvc = None
+cargo:rerun-if-env-changed=AR_x86_64_pc_windows_msvc
+AR_x86_64_pc_windows_msvc = None
+cargo:rerun-if-env-changed=HOST_AR
+HOST_AR = None
+cargo:rerun-if-env-changed=AR
+AR = None
+cargo:rerun-if-env-changed=ARFLAGS
+ARFLAGS = None
+cargo:rerun-if-env-changed=HOST_ARFLAGS
+HOST_ARFLAGS = None
+cargo:rerun-if-env-changed=ARFLAGS_x86_64_pc_windows_msvc
+ARFLAGS_x86_64_pc_windows_msvc = None
+cargo:rerun-if-env-changed=ARFLAGS_x86_64-pc-windows-msvc
+ARFLAGS_x86_64-pc-windows-msvc = None
+cargo:rustc-link-lib=static=bz2
+cargo:rustc-link-search=native=E:\git\oak-package-manager\dryad_base\target\release\build\bzip2-sys-02842086d7fff020\out\lib
+cargo:root=E:\git\oak-package-manager\dryad_base\target\release\build\bzip2-sys-02842086d7fff020\out
+cargo:include=E:\git\oak-package-manager\dryad_base\target\release\build\bzip2-sys-02842086d7fff020\out\include

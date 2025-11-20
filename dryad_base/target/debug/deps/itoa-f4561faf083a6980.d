@@ -1,0 +1,6 @@
+E:\git\oak-package-manager\dryad_base\target\debug\deps\itoa-f4561faf083a6980.d: C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\itoa-1.0.15\src\lib.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\itoa-1.0.15\src\udiv128.rs
+
+E:\git\oak-package-manager\dryad_base\target\debug\deps\libitoa-f4561faf083a6980.rmeta: C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\itoa-1.0.15\src\lib.rs C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\itoa-1.0.15\src\udiv128.rs
+
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\itoa-1.0.15\src\lib.rs:
+C:\Users\pedro.DESKTOP-EI6JCR4\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\itoa-1.0.15\src\udiv128.rs:

@@ -1,0 +1,1 @@
+cargo:rustc-env=MIME_TYPES_GENERATED_PATH=E:\git\oak-package-manager\dryad_base\target\release\build\mime_guess-35155a014be54bae\out\mime_types_generated.rs

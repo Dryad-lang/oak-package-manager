@@ -1,0 +1,30 @@
+// projeto-final/main.dryad
+// Projeto Dryad gerado pelo Oak
+
+#<console_io>
+
+let NOME_PROJETO = "projeto-final";
+
+function principal() {
+    let mensagem = "Olá do projeto " + NOME_PROJETO + "!";
+    print(mensagem);
+    
+    // Exemplo de função
+    let resultado = somar(5, 3);
+    print("5 + 3 = " + resultado);
+    
+    // Verificar se há argumentos da linha de comando
+    if (args != null) {
+        print("Argumentos recebidos:");
+        for (let i = 0; i < args.length; i++) {
+            print("  [" + i + "]: " + args[i]);
+        }
+    }
+}
+
+function somar(a, b) {
+    return a + b;
+}
+
+// Executar função principal
+principal();

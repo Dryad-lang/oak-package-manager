@@ -1,0 +1,10 @@
+// projeto-final/main.dryad
+// Projeto Dryad gerado pelo Oak
+
+#<console_io>
+
+let i = 0;
+
+for i = 0; i < 10; i++ {
+            print("a");
+        }

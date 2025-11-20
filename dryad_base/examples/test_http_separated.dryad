@@ -1,0 +1,64 @@
+// Teste do HTTP Client e Server separados
+// Para usar: dryad test_http_separated.dryad
+
+#<http_client>
+#<http_server>
+#<console_io>
+#<time>
+
+// ========================
+// Exemplo HTTP Server
+// ========================
+
+native_println("Criando servidor HTTP...");
+
+// Cria um servidor
+native_http_server_create("meu_server", "127.0.0.1", 8080);
+
+// Define rotas GET
+native_http_server_get("meu_server", "/", "<h1>Bem-vindo ao Dryad HTTP Server!</h1><p>Servidor funcionando!</p>");
+native_http_server_get("meu_server", "/api", '{"message": "API funcionando", "timestamp": "2025"}');
+native_http_server_get("meu_server", "/about", "<h2>Sobre</h2><p>Este é um servidor HTTP criado com Dryad!</p>");
+
+// Define rotas POST
+native_http_server_post("meu_server", "/api/data", '{"response": "Dados recebidos via POST"}');
+
+// Inicia o servidor
+native_http_server_start("meu_server");
+
+native_println("Servidor iniciado em http://127.0.0.1:8080");
+native_println("Acesse as rotas:");
+native_println("  - http://127.0.0.1:8080/         (Home)");
+native_println("  - http://127.0.0.1:8080/api      (API JSON)");  
+native_println("  - http://127.0.0.1:8080/about    (Sobre)");
+
+// ========================
+// Exemplo HTTP Client
+// ========================
+
+native_println("");
+native_println("Testando cliente HTTP...");
+
+// Aguarda um pouco para o servidor inicializar
+native_sleep(1000);
+
+// Testa requisições para APIs externas
+native_println("Fazendo requisição GET...");
+let response = native_http_get("https://httpbin.org/get");
+native_println("Response recebida do httpbin.org");
+
+// Status do servidor
+native_println("");
+let status = native_http_server_status("meu_server");
+native_println("Status do servidor: " + status);
+
+native_println("");
+native_println("Servidor rodando! Pressione Ctrl+C para parar.");
+native_println("Teste as rotas no seu navegador enquanto o programa roda.");
+
+// Aguarda para manter o servidor ativo
+native_sleep(30000); // 30 segundos
+
+// Para o servidor
+native_http_server_stop("meu_server");
+native_println("Servidor parado!");

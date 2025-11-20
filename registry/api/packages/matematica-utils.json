@@ -1,0 +1,47 @@
+{
+  "name": "matematica-utils",
+  "version": "1.1.0",
+  "description": "Biblioteca completa de utilitários matemáticos para Dryad incluindo álgebra, geometria e estatística",
+  "author": "Dryad Community <community@dryad-lang.org>",
+  "license": "MIT",
+  "keywords": ["matematica", "algebra", "geometria", "estatistica", "utils"],
+  "homepage": "https://github.com/dryad-lang/matematica-utils",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dryad-lang/matematica-utils.git"
+  },
+  "dependencies": {
+    "dryad-stdlib": "^0.1.0"
+  },
+  "dev_dependencies": {
+    "dryad-test": "^1.0.0"
+  },
+  "exports": {
+    "algebra": "./lib/algebra.dryad",
+    "geometria": "./lib/geometria.dryad",
+    "estatistica": "./lib/estatistica.dryad"
+  },
+  "download_url": "https://registry.dryad-lang.org/packages/matematica-utils/1.1.0.tar.gz",
+  "checksum": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "file_size": 15420,
+  "published_at": "2025-11-15T10:30:00Z",
+  "versions": [
+    {
+      "version": "1.1.0",
+      "download_url": "https://registry.dryad-lang.org/packages/matematica-utils/1.1.0.tar.gz",
+      "checksum": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_at": "2025-11-15T10:30:00Z"
+    },
+    {
+      "version": "1.0.0",
+      "download_url": "https://registry.dryad-lang.org/packages/matematica-utils/1.0.0.tar.gz",
+      "checksum": "sha256:a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+      "published_at": "2025-11-01T14:20:00Z"
+    }
+  ],
+  "downloads": {
+    "total": 1247,
+    "last_month": 156,
+    "last_week": 42
+  }
+}
