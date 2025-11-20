@@ -41,8 +41,10 @@ WORKDIR /var/www/html
 # Copy application files
 COPY . /var/www/html
 
-# Ensure .env file exists (copy from .env.example if .env doesn't exist)
-RUN if [ ! -f /var/www/html/.env ]; then \
+# Use Docker-specific .env file for container
+RUN if [ -f /var/www/html/.env.docker ]; then \
+        cp /var/www/html/.env.docker /var/www/html/.env; \
+    elif [ ! -f /var/www/html/.env ]; then \
         cp /var/www/html/.env.example /var/www/html/.env; \
     fi
 

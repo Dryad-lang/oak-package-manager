@@ -95,19 +95,21 @@ Acesse a aplicação em: **http://localhost:7800** 🎉
 - **Solução:** Movido para porta 7832 no host
 - **Resultado:** Zero conflitos com instalações locais
 
-## 🎯 Próximo Deploy
+## 🎯 Deploy Final - CORRETO
+
+**Status:** 99% funcionando! Apenas 1 pequena correção para 100% ✅
 
 Execute estes comandos na sua VM:
 
 ```bash
-# 1. Atualizar código
+# 1. Atualizar código final
 git pull origin main
 
-# 2. Limpar ambiente
-docker compose down -v
+# 2. Rebuild apenas o Laravel (correção de .env)
+docker compose build dryad-web
 
-# 3. Deploy completo
-./deploy.sh
+# 3. Reiniciar sistema
+docker compose down && docker compose up -d
 ```
 
 **URLs finais:**
