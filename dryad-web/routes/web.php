@@ -32,3 +32,20 @@ Route::middleware('auth')->group(function () {
     Route::put('/developer/packages/{package}', [DeveloperController::class, 'update'])->name('developer.update');
     Route::delete('/developer/packages/{package}', [DeveloperController::class, 'destroy'])->name('developer.destroy');
 });
+
+// API Routes for Registry
+use App\Http\Controllers\Api\RegistryController;
+
+Route::prefix('api/registry')->group(function () {
+    // Publish a new package version
+    Route::post('/publish', [RegistryController::class, 'publish']);
+    
+    // Get package information
+    Route::get('/packages/{packageName}', [RegistryController::class, 'getPackage']);
+    
+    // Download package version
+    Route::get('/packages/{packageName}/{version}', [RegistryController::class, 'downloadPackage']);
+    
+    // List all packages
+    Route::get('/packages', [RegistryController::class, 'listPackages']);
+});

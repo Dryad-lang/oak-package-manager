@@ -1,181 +1,80 @@
+version: '3.8'
+
 services:
-  # Laravel Frontend
-  dryad-web:
-    build: 
+  # Laravel Frontend & Registry API
+  laravel:
+    build:
       context: ./dryad-web
       dockerfile: Dockerfile
-    container_name: dryad-web
     ports:
-      - "7800:80"
+      - "8000:8000"
+    volumes:
+      - ./dryad-web:/var/www/html
+      - laravel_storage:/var/www/html/storage
     environment:
-      - APP_ENV=production
-      - APP_DEBUG=false
-      - DRYAD_REGISTRY_URL=http://registry-api:4000
-    # volumes:
-    #   - ./dryad-web:/var/www/html  # Removido para não sobrescrever vendor/
+      - DB_CONNECTION=mysql
+      - DB_HOST=mariadb
+      - DB_PORT=3306
+      - DB_DATABASE=dryad
+      - DB_USERNAME=dryad
+      - DB_PASSWORD=dryad_pass
+      - FORGEJO_URL=http://forgejo:3000
+      - FORGEJO_TOKEN=${FORGEJO_TOKEN:-}
+      - APP_URL=http://localhost:8000
+      - APP_ENV=local
+      - APP_DEBUG=true
     depends_on:
-      postgres:
-        condition: service_healthy
-    restart: unless-stopped
+      - mariadb
+      - forgejo
     networks:
-      - dryad-network
-    healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 60s
+      - oak_network
 
-  # PostgreSQL Database
-  postgres:
-    image: postgres:16-alpine
-    container_name: dryad-postgres
-    ports:
-      - "7832:5432"
+  # MariaDB Database
+  mariadb:
+    image: mariadb:11
     environment:
-      POSTGRES_DB: dryad_packages
-      POSTGRES_USER: dryad_user
-      POSTGRES_PASSWORD: dryad_pass
-      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --lc-collate=C --lc-ctype=C"
-      # Configurações para múltiplos bancos
-      POSTGRES_MULTIPLE_DATABASES: "gitea"
-      POSTGRES_MULTIPLE_USERS: "gitea:gitea_password"
+      - MYSQL_ROOT_PASSWORD=root_pass
+      - MYSQL_DATABASE=dryad
+      - MYSQL_USER=dryad
+      - MYSQL_PASSWORD=dryad_pass
     volumes:
-      - postgres-data:/var/lib/postgresql/data
-      - ./database/init:/docker-entrypoint-initdb.d
-    networks:
-      - dryad-network
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U dryad_user -d dryad_packages"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 40s
-
-  # Registry API Server
-  registry-api:
-    build: 
-      context: ./registry-server/registry-api
-      dockerfile: Dockerfile
-    container_name: dryad-registry-api
+      - mariadb_data:/var/lib/mysql
     ports:
-      - "7840:4000"
+      - "3306:3306"
+    networks:
+      - oak_network
+
+  # Forgejo Git Server
+  forgejo:
+    image: codeberg.org/forgejo/forgejo:latest
     environment:
-      - NODE_ENV=production
-      - PORT=4000
-      - PACKAGES_DIR=/app/packages
-      - UPLOADS_DIR=/app/uploads
-      - GITEA_URL=http://gitea:3000
-      - GITEA_TOKEN=gitea_admin_token
-      - GITEA_USERNAME=admin
-      - GITEA_PASSWORD=admin123
-      - POSTGRES_HOST=postgres
-      - POSTGRES_PORT=5432
-      - POSTGRES_DB=dryad_packages
-      - POSTGRES_USER=dryad_user
-      - POSTGRES_PASSWORD=dryad_pass
+      - USER_UID=1000
+      - USER_GID=1000
+      - FORGEJO__database__DB_TYPE=sqlite3
+      - FORGEJO__database__PATH=/data/forgejo.db
+      - FORGEJO__server__DOMAIN=localhost
+      - FORGEJO__server__HTTP_PORT=3000
+      - FORGEJO__server__ROOT_URL=http://localhost:3000/
+      - FORGEJO__server__SSH_PORT=222
+      - FORGEJO__server__START_SSH_SERVER=true
+      - FORGEJO__service__DISABLE_REGISTRATION=false
+      - FORGEJO__service__REQUIRE_SIGNIN_VIEW=false
+      - FORGEJO__actions__ENABLED=false
     volumes:
-      - registry-packages:/app/packages
-      - registry-uploads:/app/uploads
-      - ./registry:/app/registry:ro
-    networks:
-      - dryad-network
-    depends_on:
-      postgres:
-        condition: service_healthy
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:4000/api/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 45s
-
-  # Git Server (Gitea) para versionamento de pacotes
-  gitea:
-    image: gitea/gitea:1.21
-    container_name: dryad-gitea
-    environment:
-      USER_UID: 1000
-      USER_GID: 1000
-      GITEA__database__DB_TYPE: postgres
-      GITEA__database__HOST: dryad-postgres
-      GITEA__database__PORT: 5432
-      GITEA__database__NAME: gitea
-      GITEA__database__USER: gitea
-      GITEA__database__PASSWD: gitea_password
-      GITEA__server__DOMAIN: localhost
-      GITEA__server__SSH_DOMAIN: localhost
-      GITEA__server__ROOT_URL: "http://localhost:7850/"
-      GITEA__server__HTTP_PORT: 3000
-      GITEA__security__INSTALL_LOCK: false
-      GITEA__security__SECRET_KEY: dryad_gitea_secret_key_2024
-      GITEA__webhook__ALLOWED_HOST_LIST: "*"
-      GITEA__service__DISABLE_REGISTRATION: false
-      GITEA__service__REQUIRE_SIGNIN_VIEW: false
-    networks:
-      - dryad-network
-    volumes:
-      - gitea-data:/data
+      - forgejo_data:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     ports:
-      - "7850:3000"
-      - "7822:22"
-    depends_on:
-      postgres:
-        condition: service_healthy
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 60s
-
-  # Nginx Reverse Proxy
-  nginx:
-    image: nginx:alpine
-    container_name: dryad-nginx
-    ports:
-      - "7880:80"
-      - "7843:443"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/ssl:/etc/nginx/ssl:ro
-    depends_on:
-      - dryad-web
-      - registry-api
+      - "3000:3000"
+      - "222:22"
     networks:
-      - dryad-network
-
-  # Redis for caching (optional)
-  redis:
-    image: redis:7-alpine
-    container_name: dryad-redis
-    ports:
-      - "7879:6379"
-    volumes:
-      - redis-data:/data
-    networks:
-      - dryad-network
-
-networks:
-  dryad-network:
-    driver: bridge
-    driver_opts:
-      com.docker.network.bridge.name: "dryad-br0"
-    ipam:
-      config:
-        - subnet: "172.20.0.0/16"
+      - oak_network
 
 volumes:
-  registry-packages:
-    driver: local
-  registry-uploads:
-    driver: local
-  redis-data:
-    driver: local
-  postgres-data:
-    driver: local
-  gitea-data:
-    driver: local
+  mariadb_data:
+  forgejo_data:
+  laravel_storage:
+
+networks:
+  oak_network:
+    driver: bridge

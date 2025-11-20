@@ -14,8 +14,7 @@ RUN apk add --no-cache \
     freetype-dev \
     libzip-dev \
     oniguruma-dev \
-    postgresql-dev \
-    postgresql-client \
+    mariadb-client \
     sqlite \
     sqlite-dev
 
@@ -25,7 +24,7 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
         gd \
         pdo \
         pdo_sqlite \
-        pdo_pgsql \
+        pdo_mysql \
         mbstring \
         zip \
         exif \

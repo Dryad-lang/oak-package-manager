@@ -83,7 +83,159 @@ oak-package-manager/
 ├── 📦 registry/             # Dados de exemplo
 ├── 🐳 docker-compose.yml    # Orquestração
 ├── 🚀 deploy.bat/.sh        # Scripts de deploy
-└── 📖 README.md             # Este arquivo
+└── 📖 # Dryad Package Manager - Arquitetura Simplificada
+
+## 🏗️ Nova Arquitetura (Forgejo-based)
+
+### Componentes Principais
+
+1. **Laravel Frontend & Registry API** (Porta 8000)
+   - Interface web para navegar pacotes
+   - API REST para publish/install de pacotes
+   - Integração direta com Forgejo
+
+2. **Forgejo Git Server** (Porta 3000, SSH 222)
+   - Armazenamento de repositórios de pacotes
+   - Gerenciamento de versões via tags/releases
+   - Interface web para visualizar código
+
+3. **MariaDB Database** (Porta 3306)
+   - Dados do Laravel (usuários, cache, etc.)
+   - Metadados de pacotes
+
+4. **Oak CLI (Dryad)**
+   - Comandos para publish/install de pacotes
+   - Integração com Registry API
+
+## 🚀 Como Usar
+
+### Iniciar o Sistema
+
+```bash
+# Subir todos os serviços
+docker-compose up -d
+
+# Verificar status
+docker-compose ps
+```
+
+### Acessar Interfaces
+
+- **Laravel Web**: http://localhost:8000
+- **Forgejo Git**: http://localhost:3000
+- **MariaDB**: localhost:3306
+
+### Configurar Forgejo (Primeira vez)
+
+1. Acesse http://localhost:3000
+2. Complete o setup inicial do Forgejo
+3. Crie uma organização chamada `dryad-packages`
+4. Gere um token de API e configure no `.env`:
+   ```bash
+   FORGEJO_TOKEN=seu_token_aqui
+   ```
+
+### Usar o Oak CLI
+
+```bash
+# Compilar o CLI
+cd dryad_base
+cargo build --release
+
+# Publicar um pacote
+./target/release/dryad publish
+
+# Instalar um pacote
+./target/release/dryad install nome-do-pacote
+
+# Listar pacotes disponíveis
+./target/release/dryad list
+```
+
+## 📁 Estrutura do Projeto
+
+```
+oak-package-manager/
+├── docker-compose.yml          # Configuração Docker simplificada
+├── .env                       # Configurações do sistema
+├── dryad-web/                # Laravel Frontend & API
+│   ├── app/Http/Controllers/Api/RegistryController.php
+│   ├── app/Services/ForgejoService.php
+│   └── routes/web.php        # Rotas da API
+├── dryad_base/               # Oak CLI
+│   └── dryad_cli/src/main.rs # CLI com comandos de pacotes
+└── README.md                 # Este arquivo
+```
+
+## 🔄 Fluxo de Operações
+
+### Publicação de Pacote
+
+1. `dryad publish` → Laravel API `/api/registry/publish`
+2. Laravel → Forgejo API (criar/atualizar repositório)
+3. Laravel → Forgejo API (upload de arquivos)
+4. Laravel → Forgejo API (criar release/tag)
+
+### Instalação de Pacote
+
+1. `dryad install <pacote>` → Laravel API `/api/registry/packages/<pacote>`
+2. Laravel → Forgejo API (obter informações do pacote)
+3. Laravel retorna URL de download
+4. CLI baixa e extrai o pacote
+
+### Listagem de Pacotes
+
+1. `dryad list` → Laravel API `/api/registry/packages`
+2. Laravel → Forgejo API (listar repositórios)
+3. Laravel retorna lista formatada
+
+## 🔧 API Endpoints
+
+- `POST /api/registry/publish` - Publicar pacote
+- `GET /api/registry/packages` - Listar todos os pacotes
+- `GET /api/registry/packages/{name}` - Informações do pacote
+- `GET /api/registry/packages/{name}/{version}` - Download de versão específica
+
+## 🌱 Vantagens da Nova Arquitetura
+
+- ✅ **Simplicidade**: Apenas 3 serviços principais
+- ✅ **Padrão**: Usar Forgejo como Git server padrão
+- ✅ **Flexibilidade**: Laravel gerencia API diretamente
+- ✅ **Escalabilidade**: MariaDB como base sólida
+- ✅ **Manutenibilidade**: Menos componentes complexos
+
+## 🐛 Troubleshooting
+
+### Forgejo não conecta
+
+```bash
+# Verificar logs
+docker-compose logs forgejo
+
+# Reiniciar serviço
+docker-compose restart forgejo
+```
+
+### Laravel não conecta com MariaDB
+
+```bash
+# Verificar conexão
+docker-compose exec laravel php artisan tinker
+# No tinker: DB::connection()->getPdo()
+
+# Verificar logs
+docker-compose logs mariadb
+```
+
+### CLI não encontra registry
+
+```bash
+# Verificar se Laravel está rodando
+curl http://localhost:8000/api/registry/packages
+
+# Usar registry customizado
+./target/release/dryad list --registry http://outro-registry:8000/api/registry
+```             # Este arquivo
 ```
 
 ## 🔧 Comandos Úteis
