@@ -121,13 +121,13 @@ docker-compose ps
 
 ### Acessar Interfaces
 
-- **Laravel Web**: http://localhost:8000
-- **Forgejo Git**: http://localhost:3000
-- **MariaDB**: localhost:3306
+- **Laravel Web**: http://localhost:7800
+- **Forgejo Git**: http://localhost:7850
+- **MariaDB**: localhost:7832
 
 ### Configurar Forgejo (Primeira vez)
 
-1. Acesse http://localhost:3000
+1. Acesse http://localhost:7850
 2. Complete o setup inicial do Forgejo
 3. Crie uma organização chamada `dryad-packages`
 4. Gere um token de API e configure no `.env`:

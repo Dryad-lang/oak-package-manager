@@ -48,12 +48,12 @@ echo.
 echo 🌟 Sistema iniciado com sucesso!
 echo.
 echo 📱 Interfaces disponíveis:
-echo    - Laravel Web: http://localhost:8000
-echo    - Forgejo Git: http://localhost:3000
-echo    - MariaDB:     localhost:3306
+echo    - Laravel Web: http://localhost:7800
+echo    - Forgejo Git: http://localhost:7850
+echo    - MariaDB:     localhost:7832
 echo.
 echo ⚙️  Configuração inicial necessária:
-echo    1. Acesse http://localhost:3000 para configurar Forgejo
+echo    1. Acesse http://localhost:7850 para configurar Forgejo
 echo    2. Crie uma organização chamada 'dryad-packages'
 echo    3. Gere um token de API no Forgejo
 echo    4. Configure FORGEJO_TOKEN no arquivo .env

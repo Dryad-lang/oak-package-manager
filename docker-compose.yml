@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Laravel Frontend & Registry API
   laravel:
@@ -7,7 +5,7 @@ services:
       context: ./dryad-web
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - "7800:8000"
     volumes:
       - ./dryad-web:/var/www/html
       - laravel_storage:/var/www/html/storage
@@ -20,7 +18,7 @@ services:
       - DB_PASSWORD=dryad_pass
       - FORGEJO_URL=http://forgejo:3000
       - FORGEJO_TOKEN=${FORGEJO_TOKEN:-}
-      - APP_URL=http://localhost:8000
+      - APP_URL=http://localhost:7800
       - APP_ENV=local
       - APP_DEBUG=true
     depends_on:
@@ -40,13 +38,13 @@ services:
     volumes:
       - mariadb_data:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - "7832:3306"
     networks:
       - oak_network
 
   # Forgejo Git Server
   forgejo:
-    image: codeberg.org/forgejo/forgejo:latest
+    image: forgejo/forgejo:1.21
     environment:
       - USER_UID=1000
       - USER_GID=1000
@@ -54,8 +52,8 @@ services:
       - FORGEJO__database__PATH=/data/forgejo.db
       - FORGEJO__server__DOMAIN=localhost
       - FORGEJO__server__HTTP_PORT=3000
-      - FORGEJO__server__ROOT_URL=http://localhost:3000/
-      - FORGEJO__server__SSH_PORT=222
+      - FORGEJO__server__ROOT_URL=http://localhost:7850/
+      - FORGEJO__server__SSH_PORT=22
       - FORGEJO__server__START_SSH_SERVER=true
       - FORGEJO__service__DISABLE_REGISTRATION=false
       - FORGEJO__service__REQUIRE_SIGNIN_VIEW=false
@@ -65,8 +63,8 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     ports:
-      - "3000:3000"
-      - "222:22"
+      - "7850:3000"
+      - "7822:22"
     networks:
       - oak_network
 

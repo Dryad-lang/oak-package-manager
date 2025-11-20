@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Comandos úteis do Docker Compose para Dryad Package Manager
+echo "🐳 Comandos Docker Compose - Dryad Package Manager"
+echo "=================================================="
+
+echo ""
+echo "📋 Comandos principais:"
+echo ""
+echo "🚀 Iniciar todos os serviços:"
+echo "   docker-compose up -d"
+echo ""
+echo "⏹️  Parar todos os serviços:"
+echo "   docker-compose down"
+echo ""
+echo "🗑️  Parar e remover volumes (limpar dados):"
+echo "   docker-compose down -v"
+echo ""
+echo "📊 Ver status dos containers:"
+echo "   docker-compose ps"
+echo ""
+echo "📝 Ver logs em tempo real:"
+echo "   docker-compose logs -f"
+echo ""
+echo "📝 Ver logs de um serviço específico:"
+echo "   docker-compose logs -f laravel"
+echo "   docker-compose logs -f forgejo"
+echo "   docker-compose logs -f mariadb"
+echo ""
+echo "🔄 Reiniciar um serviço:"
+echo "   docker-compose restart laravel"
+echo ""
+echo "🔧 Reconstruir imagens:"
+echo "   docker-compose build"
+echo "   docker-compose up --build -d"
+echo ""
+echo "💻 Executar comandos dentro de um container:"
+echo "   docker-compose exec laravel bash"
+echo "   docker-compose exec laravel php artisan migrate"
+echo ""
+echo "🌐 URLs dos serviços:"
+echo "   - Laravel:  http://localhost:7800"
+echo "   - Forgejo:  http://localhost:7850"
+echo "   - MariaDB:  localhost:7832"
+echo ""
+
+# Se nenhum argumento for passado, mostrar o status
+if [ $# -eq 0 ]; then
+    echo "📦 Status atual dos containers:"
+    docker-compose ps
+    echo ""
+    echo "💡 Use './docker-help.sh <comando>' para executar diretamente"
+    echo "   Exemplo: ./docker-help.sh up -d"
+else
+    echo "🚀 Executando: docker-compose $@"
+    docker-compose "$@"
+fi
