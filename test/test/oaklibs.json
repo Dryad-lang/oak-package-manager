@@ -1,0 +1,18 @@
+{
+  "name": "test",
+  "version": "0.1.0",
+  "description": null,
+  "author": null,
+  "license": "MIT",
+  "type": "project",
+  "main": "main.dryad",
+  "dependencies": {
+    "teste": "latest"
+  },
+  "dev_dependencies": {},
+  "scripts": {
+    "check": "oak exec --validate main.dryad",
+    "start": "oak exec main.dryad",
+    "test": "oak exec tests/test.dryad"
+  }
+}
