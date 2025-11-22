@@ -1,0 +1,8 @@
+// teste/src/main.dryad
+// Biblioteca genérica gerada pelo Oak
+
+export function exemplo() {
+    return "Função de exemplo da biblioteca teste";
+}
+
+export let VERSAO = "latest";

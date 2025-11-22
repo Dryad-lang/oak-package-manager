@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Services\PackageService;
-use App\Models\Package; // Certifique-se de que o modelo está corretamente importado
 
 class PackageController extends Controller
 {
@@ -21,8 +20,93 @@ class PackageController extends Controller
      */
     public function index(Request $request)
     {
-        // Supondo que o modelo seja Package
-        $packages = Package::paginate(20); // ou o número desejado por página
+        // Simulando dados de pacotes (em produção viria de uma API)
+        $allPackages = [
+            [
+                'name' => 'matematica-utils',
+                'version' => '1.1.0',
+                'description' => 'Biblioteca completa de utilitários matemáticos para Dryad incluindo álgebra, geometria e estatística',
+                'downloads' => 1250,
+                'author' => 'Dryad Community',
+                'keywords' => ['matematica', 'algebra', 'geometria'],
+                'updated_at' => '2025-11-18T10:30:00Z'
+            ],
+            [
+                'name' => 'dryad-stdlib',
+                'version' => '0.1.0',
+                'description' => 'Biblioteca padrão oficial do Dryad com funções essenciais',
+                'downloads' => 2340,
+                'author' => 'Dryad Core Team',
+                'keywords' => ['stdlib', 'core', 'essencial'],
+                'updated_at' => '2025-11-15T14:20:00Z'
+            ],
+            [
+                'name' => 'file-utils',
+                'version' => '2.0.0',
+                'description' => 'Utilitários para manipulação de arquivos e diretórios',
+                'downloads' => 890,
+                'author' => 'Community',
+                'keywords' => ['file', 'directory', 'utils'],
+                'updated_at' => '2025-11-10T16:45:00Z'
+            ],
+            [
+                'name' => 'http-client',
+                'version' => '1.2.3',
+                'description' => 'Cliente HTTP simples e poderoso para requisições web',
+                'downloads' => 1890,
+                'author' => 'WebDev Team',
+                'keywords' => ['http', 'client', 'web'],
+                'updated_at' => '2025-11-12T09:15:00Z'
+            ],
+            [
+                'name' => 'json-parser',
+                'version' => '0.8.2',
+                'description' => 'Parser JSON rápido e eficiente para Dryad',
+                'downloads' => 1567,
+                'author' => 'JSON Guild',
+                'keywords' => ['json', 'parser', 'data'],
+                'updated_at' => '2025-11-08T11:30:00Z'
+            ],
+            [
+                'name' => 'crypto-utils',
+                'version' => '1.0.5',
+                'description' => 'Funções criptográficas e de hashing para segurança',
+                'downloads' => 756,
+                'author' => 'Security Team',
+                'keywords' => ['crypto', 'security', 'hash'],
+                'updated_at' => '2025-11-14T13:22:00Z'
+            ]
+        ];
+
+        // Filtrar por busca se fornecida
+        $packages = $allPackages;
+        if ($request->has('search') && !empty($request->search)) {
+            $search = strtolower($request->search);
+            $packages = array_filter($packages, function($package) use ($search) {
+                return str_contains(strtolower($package['name']), $search) ||
+                       str_contains(strtolower($package['description']), $search) ||
+                       (isset($package['keywords']) && 
+                        array_filter($package['keywords'], fn($k) => str_contains(strtolower($k), $search)));
+            });
+        }
+
+        // Ordenar
+        $sort = $request->get('sort', 'popularity');
+        switch ($sort) {
+            case 'recent':
+                usort($packages, fn($a, $b) => strtotime($b['updated_at']) - strtotime($a['updated_at']));
+                break;
+            case 'name':
+                usort($packages, fn($a, $b) => strcmp($a['name'], $b['name']));
+                break;
+            case 'popularity':
+            default:
+                usort($packages, fn($a, $b) => $b['downloads'] - $a['downloads']);
+                break;
+        }
+
+        // Simular paginação
+        $packages = collect($packages);
 
         return view('packages.index', compact('packages'));
     }

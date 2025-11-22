@@ -1,0 +1,7 @@
+{
+  "description": "Biblioteca teste instalada pelo Oak",
+  "main": "src/main.dryad",
+  "name": "teste",
+  "type": "library",
+  "version": "latest"
+}
